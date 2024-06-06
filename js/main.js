@@ -21,6 +21,7 @@ let lengthOfPrefix = 0;
 
 let availableCommands = [
   "help",
+  "doggo",
   "changelog",
   "education",
   "career",
@@ -29,7 +30,7 @@ let availableCommands = [
   "history",
   "open",
   "repo",
-  "",
+  "penguins",
 ]; // Sets the available commands for the red stuff to work.
 
 let advancedAvailableCommands = ["open "];
@@ -260,6 +261,7 @@ function commandHandler(command, cmdline = true) {
   switch (command) {
     case "help":
       helpCommand("help", "Outputs help message (AKA [cb]this[/cb])");
+      helpCommand("doggo", "Who is the doggo");
       helpCommand("changelog", "A Brief History of Sam");
       helpCommand("education", "Education History");
       helpCommand("career", "Career History");
@@ -267,10 +269,19 @@ function commandHandler(command, cmdline = true) {
       helpCommand("overview", "overview with links");
       helpCommand("startup", "Says startup message");
       helpCommand("credits", "Displays credits");
-
+      helpCommand("penguins", "Generate new penguin image");
       helpCommand("history", "Shows command history of current session");
       helpCommand("open", "Opens a new tab with passed in url");
       helpCommand("repo", "Shows the github repos link");
+      break;
+    
+    case "doggo":
+      addLine("Arlo is my pet cockapoo! He is as adorable as he is clingy");
+      addLine("Known aliases:");
+      addLine("[cy]Bud[/cy]");
+      addLine("[cy]Monkey Man[/cy]");
+      addLine("[cy]Señor Monk[/cy]");
+      addLine("[cy]Ewok no.3[/cy]");
       break;
 
     case "changelog":
@@ -307,9 +318,6 @@ function commandHandler(command, cmdline = true) {
       addLine("[n/]");
       break;
 
-    case "education":
-      addLine("Yessir!");
-      break;
     case "cv":
       const iframe = document.createElement('iframe');
         iframe.src = './files/SamuelWatsonCV.pdf';
@@ -370,13 +378,39 @@ function commandHandler(command, cmdline = true) {
     case "clear":
       clearOutput();
       break;
-    case "":
+    case "penguins":
+
+      function removePenguinImage() {
+      const imgElement = document.getElementById("penguin-image");
+      if (imgElement) {
+          imgElement.remove();
+        }
+      }
+      function updatePenguinImage(imgUrl) {
+        const imgElement = document.getElementById("penguin-image");
+        if (imgElement) {
+            imgElement.src = imgUrl;
+        } else {
+            const newImgElement = document.createElement("img");
+            newImgElement.id = "penguin-image";
+            newImgElement.src = imgUrl;
+            document.body.appendChild(newImgElement);
+        }
+      }
+      fetch('https://penguin.sjsharivker.workers.dev/api')
+        .then(response => response.json())
+        .then(({ img, species }) => {
+          addLine(`Species: ${species}`);
+          updatePenguinImage(img);
+        })
+      .catch(error => console.error('Error fetching data:', error));
       break;
     default:
       if (!advancedCommands(command))
         addLine(
           "[cr]Unknown Command! Use [click-help]help[/click] for help![/cr]"
         );
+      removePenguinImage();
       break;
   }
   window.scrollTo(0, document.body.scrollHeight);

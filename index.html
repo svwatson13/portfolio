@@ -7,6 +7,12 @@
     <title>Sam's Portfolio</title>
     <link rel="icon" href="./files/penguin.ico">
     <style>
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
         .ascii-art {
             font-family: monospace;
             white-space: pre;
@@ -14,9 +20,15 @@
             text-align: center;
             margin-top: 20px;
         }
+        .image {
+            width: 200px; /* Adjust the size as needed */
+            height: auto;
+            margin-left: 200px
+        }
     </style>
 </head>
 <body>
+  <div class="container">
     <div class="ascii-art">
      ___           ___           ___     
     /\__\         /\  \         /\  \    
@@ -40,7 +52,9 @@
   \:\/:/  /     \:\  \      \/__/ \:\  \    \/_/:/  /     \:\/:/  /     \:\  \     
    \::/  /       \:\__\            \:\__\     /:/  /       \::/  /       \:\__\    
     \/__/         \/__/             \/__/     \/__/         \/__/         \/__/    
-  </div>                                         
+  </div>      
+  <img src="./files/arlo.png" alt="Image 1" class="image">
+</div>                                     
 </body>
   <head>
     <meta charset="UTF-8" />
