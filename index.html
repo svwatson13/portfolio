@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam's Portfolio</title>
+    <link rel="icon" href="./files/penguin.ico">
+    <style>
+        .ascii-art {
+            font-family: monospace;
+            white-space: pre;
+            font-size: 15px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ascii-art">
+     ___           ___           ___     
+    /\__\         /\  \         /\  \    
+   /:/ _/_       /::\  \       |::\  \   
+  /:/ /\  \     /:/\:\  \      |:|:\  \  
+ /:/ /::\  \   /:/ /::\  \   __|:|\:\  \ 
+/:/_/:/\:\__\ /:/_/:/\:\__\ /::::|_\:\__\
+\:\/:/ /:/  / \:\/:/  \/__/ \:\~~\  \/__/
+ \::/ /:/  /   \::/__/       \:\  \      
+  \/_/:/  /     \:\  \        \:\  \     
+    /:/  /       \:\__\        \:\__\    
+    \/__/         \/__/         \/__/    
+     ___           ___             ___         ___           ___           ___     
+    /\  \         /\  \           /\__\       /\__\         /\  \         /\  \    
+   _\:\  \       /::\  \         /:/  /      /:/ _/_       /::\  \        \:\  \   
+  /\ \:\  \     /:/\:\  \       /:/  /      /:/ /\  \     /:/\:\  \        \:\  \  
+ _\:\ \:\  \   /:/ /::\  \     /:/__/      /:/ /::\  \   /:/  \:\  \   _____\:\  \ 
+/\ \:\ \:\__\ /:/_/:/\:\__\   /::\  \     /:/_/:/\:\__\ /:/__/ \:\__\ /::::::::\__\
+\:\ \:\/:/  / \:\/:/  \/__/  /:/\:\  \    \:\/:/ /:/  / \:\  \ /:/  / \:\~~\~~\/__/
+ \:\ \::/  /   \::/__/      /:/  \:\  \    \::/ /:/  /   \:\  /:/  /   \:\  \      
+  \:\/:/  /     \:\  \      \/__/ \:\  \    \/_/:/  /     \:\/:/  /     \:\  \     
+   \::/  /       \:\__\            \:\__\     /:/  /       \::/  /       \:\__\    
+    \/__/         \/__/             \/__/     \/__/         \/__/         \/__/    
+  </div>                                         
+</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sam's Terminal</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/main.js"></script>
+  </head>
+  <body>
+    <div id="output">
+      <div class="line">
+        Attempting to load console. P.S. If it says something below, you
+        probably need to enable javascript.
+      </div>
+      <noscript>
+        <div class="line">
+          <div class="colour red-stuff">Javascript is required to use this</div>
+        </div>
+      </noscript>
+    </div>
+    <div id="inputArea">
+      <div id="prefix"></div>
+      <input
+        type="text"
+        spellcheck="false"
+        id="terminalInput"
+        class="terminalInput"
+        onfocusout="refocus()"
+        maxlength="3"
+        size="1"
+      />
+    </div>
+    <div class="autocomplete" id="autocomplete"></div>
+  </body>
+</html>
