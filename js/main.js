@@ -378,39 +378,72 @@ function commandHandler(command, cmdline = true) {
     case "clear":
       clearOutput();
       break;
-    case "penguins":
-
-      function removePenguinImage() {
-      const imgElement = document.getElementById("penguin-image");
-      if (imgElement) {
-          imgElement.remove();
+      case "penguins":
+        // Create a container for the penguin elements
+        let penguinContainer = document.getElementById('penguin-container');
+        if (!penguinContainer) {
+            penguinContainer = document.createElement('div');
+            penguinContainer.id = 'penguin-container';
+            document.body.appendChild(penguinContainer);
         }
-      }
-      function updatePenguinImage(imgUrl) {
-        const imgElement = document.getElementById("penguin-image");
-        if (imgElement) {
-            imgElement.src = imgUrl;
-        } else {
-            const newImgElement = document.createElement("img");
-            newImgElement.id = "penguin-image";
-            newImgElement.src = imgUrl;
-            document.body.appendChild(newImgElement);
+    
+        // Function to fetch and display the penguin image and species
+        function fetchAndDisplayPenguin() {
+            fetch('https://penguin.sjsharivker.workers.dev/api')
+                .then(response => response.json())
+                .then(({ img, species }) => {
+                    // Create or update the penguin image
+                    let imgElement = document.getElementById('penguin-image');
+                    if (!imgElement) {
+                        imgElement = document.createElement('img');
+                        imgElement.id = 'penguin-image';
+                        penguinContainer.appendChild(imgElement);
+                    }
+                    imgElement.src = img;
+    
+                    // Create or update the species text
+                    let speciesText = document.getElementById('penguin-species');
+                    if (!speciesText) {
+                        speciesText = document.createElement('p');
+                        speciesText.id = 'penguin-species';
+                        penguinContainer.insertBefore(speciesText, imgElement);
+                    }
+                    speciesText.textContent = `Species: ${species}`;
+                    speciesText.style.color = 'yellow';
+    
+                    // Create or update the "Next" button
+                    let nextButton = document.getElementById('next-penguin');
+                    if (!nextButton) {
+                        nextButton = document.createElement('button');
+                        nextButton.id = 'next-penguin';
+                        nextButton.textContent = 'Next';
+                        nextButton.addEventListener('click', fetchAndDisplayPenguin);
+                        penguinContainer.insertBefore(nextButton, speciesText);
+                    }
+    
+                    // Create or update the "Close" button
+                    let closeButton = document.getElementById('close-penguin');
+                    if (!closeButton) {
+                        closeButton = document.createElement('button');
+                        closeButton.id = 'close-penguin';
+                        closeButton.textContent = 'Close';
+                        closeButton.addEventListener('click', function() {
+                            document.body.removeChild(penguinContainer);
+                        });
+                        penguinContainer.insertBefore(closeButton, nextButton);
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
         }
-      }
-      fetch('https://penguin.sjsharivker.workers.dev/api')
-        .then(response => response.json())
-        .then(({ img, species }) => {
-          addLine(`Species: ${species}`);
-          updatePenguinImage(img);
-        })
-      .catch(error => console.error('Error fetching data:', error));
-      break;
+    
+        // Initial call to fetch and display the penguin
+        fetchAndDisplayPenguin();
+        break;
     default:
       if (!advancedCommands(command))
         addLine(
           "[cr]Unknown Command! Use [click-help]help[/click] for help![/cr]"
         );
-      removePenguinImage();
       break;
   }
   window.scrollTo(0, document.body.scrollHeight);
